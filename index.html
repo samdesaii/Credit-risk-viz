@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sentinel Protocol: Underwriting & Fraud Risk Trends</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles for Chart Containers & Flow -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate 50 */
+            color: #1e293b; /* Slate 800 */
+        }
+
+        /* Palette Definition (Reference for CSS usage) 
+           Primary: #4361ee (Vivid Blue)
+           Secondary: #3a0ca3 (Deep Purple)
+           Accent: #f72585 (Hot Pink)
+           Success: #4cc9f0 (Sky Blue)
+        */
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px; /* Max width constraint */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 450px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px; 
+            }
+        }
+
+        /* Flowchart Styles (No SVG/Mermaid) */
+        .flow-node {
+            transition: all 0.3s ease;
+        }
+        .flow-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .flow-arrow-down {
+            width: 2px;
+            height: 20px;
+            background-color: #cbd5e1;
+            margin: 0 auto;
+        }
+        .flow-arrow-right {
+            height: 2px;
+            width: 20px;
+            background-color: #cbd5e1;
+            margin: auto 0;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #4361ee, #f72585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <!-- 
+        NARRATIVE PLAN:
+        1. Intro: The convergence of fraud and credit risk.
+        2. The Threat Landscape: Breakdown of fraud types (Chart: Bar).
+        3. The Silent Killer: Synthetic Identity Fraud growth (Chart: Line).
+        4. The Solution: Alternative Data vs Traditional (Chart: Radar).
+        5. The Process: Modern Underwriting Flow (HTML/CSS Diagram).
+        6. The Balance: Friction vs Risk (Chart: Scatter).
+        
+        PALETTE: "Electric Fintech" (Vivid Blue #4361ee, Deep Purple #3a0ca3, Hot Pink #f72585, Sky #4cc9f0).
+        
+        CONFIRMATION: NO SVG used. NO Mermaid JS used. Chart.js used for data. HTML/CSS for diagrams.
+    -->
+</head>
+<body class="antialiased">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight text-slate-900">
+                RISK<span style="color: #4361ee;">RADAR</span>
+            </h1>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-slate-500">
+                <a href="#landscape" class="hover:text-[#4361ee]">Threat Landscape</a>
+                <a href="#synthetic" class="hover:text-[#4361ee]">Synthetic Fraud</a>
+                <a href="#data" class="hover:text-[#4361ee]">Alt Data</a>
+                <a href="#process" class="hover:text-[#4361ee]">Process Flow</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Intro Section -->
+        <section class="mb-16 text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-6">
+                The Sentinel Protocol: <br>
+                <span class="text-gradient">Evolution of Modern Underwriting</span>
+            </h2>
+            <p class="max-w-3xl mx-auto text-lg text-slate-600 mb-10">
+                Credit risk management is no longer just about assessing the <strong>ability to pay</strong>. In 2025, the primary challenge has shifted to verifying the <strong>authenticity of the applicant</strong>. As fraud rings leverage AI to generate synthetic identities, underwriters must fuse traditional credit modeling with military-grade fraud defense.
+            </p>
+            
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#f72585]">
+                    <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Global Cost of Fraud</h3>
+                    <p class="text-4xl font-bold text-slate-900 mt-2">$5.4 Trillion</p>
+                    <p class="text-xs text-slate-500 mt-1">Projected Annual Loss (2025)</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#4361ee]">
+                    <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">AI Adoption in Risk</h3>
+                    <p class="text-4xl font-bold text-slate-900 mt-2">78%</p>
+                    <p class="text-xs text-slate-500 mt-1">Firms using ML for Decisioning</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-[#4cc9f0]">
+                    <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Avg. Decision Time</h3>
+                    <p class="text-4xl font-bold text-slate-900 mt-2">&lt; 300ms</p>
+                    <p class="text-xs text-slate-500 mt-1">Target for Real-Time Approval</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: The Threat Landscape (Bar Chart) -->
+        <section id="landscape" class="mb-20 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-4">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-[#3a0ca3] pl-4">The Shifting Attack Vectors</h3>
+                <p class="text-slate-600 mb-4 leading-relaxed">
+                    While "Third-Party Fraud" (stolen credit cards) remains prevalent, the industry is seeing a massive surge in <strong>Account Takeover (ATO)</strong> and <strong>First-Party Fraud</strong>. 
+                </p>
+                <p class="text-slate-600 mb-4 leading-relaxed">
+                    Criminals are no longer just stealing identities; they are nurturing them. First-party fraud, where legitimate customers dispute valid charges or take loans with no intent to pay, has become harder to detect as it mimics normal behavior.
+                </p>
+                <div class="bg-[#f0f9ff] p-4 rounded-lg border border-[#4cc9f0]">
+                    <strong class="text-[#3a0ca3]">Key Insight:</strong> Account Takeover attacks have increased by 150% YoY, driven by credential stuffing bots.
+                </div>
+            </div>
+            <div class="md:col-span-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="fraudTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Synthetic Identity (Line Chart) -->
+        <section id="synthetic" class="mb-20">
+            <div class="text-center mb-10">
+                <h3 class="text-2xl font-bold text-slate-800">The Silent Killer: Synthetic Identity Fraud</h3>
+                <p class="max-w-2xl mx-auto text-slate-500 mt-2">
+                    Synthetic fraud involves combining real (SSN) and fake (Name/Address) information to create a new "Frankenstein" identity. These identities are nurtured for months before "busting out" with maxed credit lines.
+                </p>
+            </div>
+            
+            <div class="bg-white p-6 md:p-10 rounded-xl shadow-lg border border-slate-100">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="md:col-span-9">
+                        <div class="chart-container">
+                            <canvas id="syntheticChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 flex flex-col justify-center space-y-6">
+                        <div class="text-center md:text-left">
+                            <h4 class="text-3xl font-bold text-[#f72585]">$6B+</h4>
+                            <p class="text-sm font-medium text-slate-600">Est. US Losses (2024)</p>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="text-3xl font-bold text-[#4361ee]">85%</h4>
+                            <p class="text-sm font-medium text-slate-600">Of Synthetics pass initial screening</p>
+                        </div>
+                        <p class="text-xs text-slate-400 italic">
+                            *Synthetics behave like "thin-file" borrowers, making them incredibly difficult for legacy rule-based systems to flag.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: The Data Revolution (Radar Chart) -->
+        <section id="data" class="mb-20 grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="order-2 md:order-1">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="chart-container">
+                        <canvas id="dataRadarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center order-1 md:order-2">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4 border-l-4 border-[#4cc9f0] pl-4">Beyond the Credit Score</h3>
+                <p class="text-slate-600 mb-4">
+                    Traditional underwriting relies heavily on payment history and debt-to-income ratios. However, for Gen Z and the unbanked, this picture is incomplete.
+                </p>
+                <p class="text-slate-600 mb-6">
+                    <strong>Alternative Data</strong> fills the blind spots. By analyzing device telemetry (typing speed, battery level), utility payments, and even social connections, modern risk models can predict default probability with higher accuracy and inclusion.
+                </p>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-[#4361ee] mr-2 text-xl">&#10003;</span>
+                        <span class="text-slate-700"><strong>Telco Data:</strong> Consistency in phone bill payments correlates to loan repayment.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#4361ee] mr-2 text-xl">&#10003;</span>
+                        <span class="text-slate-700"><strong>Device Intelligence:</strong> Identifying if a device has been used in previous fraud rings.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#4361ee] mr-2 text-xl">&#10003;</span>
+                        <span class="text-slate-700"><strong>Behavioral Biometrics:</strong> Mouse movements and gyroscope data to detect bots.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Modern Underwriting Process (CSS Flowchart) -->
+        <section id="process" class="mb-20">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold text-slate-800">The Modern Decision Engine</h3>
+                <p class="text-slate-500">A multi-layered defense architecture blending fraud checks with credit risk assessment.</p>
+            </div>
+
+            <!-- CSS Flowchart (No SVG/Mermaid) -->
+            <div class="w-full overflow-x-auto pb-6">
+                <div class="min-w-[800px] flex flex-col items-center">
+                    
+                    <!-- Row 1: Entry -->
+                    <div class="bg-[#3a0ca3] text-white px-8 py-4 rounded-full font-bold shadow-lg mb-4">
+                        Application Submission
+                    </div>
+                    <div class="flow-arrow-down h-8"></div>
+
+                    <!-- Row 2: First Line Defense -->
+                    <div class="flex justify-center gap-8 w-full">
+                        <div class="bg-white border-2 border-[#f72585] p-4 rounded-lg w-48 text-center shadow-sm flow-node">
+                            <h4 class="font-bold text-[#f72585] text-sm mb-1">Device Fingerprint</h4>
+                            <p class="text-xs text-slate-500">IP Reputation & Malware Scan</p>
+                        </div>
+                        <div class="bg-white border-2 border-[#f72585] p-4 rounded-lg w-48 text-center shadow-sm flow-node">
+                            <h4 class="font-bold text-[#f72585] text-sm mb-1">Identity Proofing</h4>
+                            <p class="text-xs text-slate-500">Document Scan & Liveness Check</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow-down h-8"></div>
+                    
+                    <!-- Decision Node -->
+                    <div class="bg-slate-100 border border-slate-300 px-6 py-2 rounded-md text-xs font-mono text-slate-500 mb-4">
+                        IF FRAUD SCORE > THRESHOLD: REJECT
+                    </div>
+                    <div class="flow-arrow-down h-8"></div>
+
+                    <!-- Row 3: Credit Analysis -->
+                    <div class="flex justify-center gap-8 w-full">
+                        <div class="bg-white border-2 border-[#4361ee] p-4 rounded-lg w-48 text-center shadow-sm flow-node">
+                            <h4 class="font-bold text-[#4361ee] text-sm mb-1">Bureau Data</h4>
+                            <p class="text-xs text-slate-500">FICO/Vantage Scores</p>
+                        </div>
+                        <div class="bg-white border-2 border-[#4361ee] p-4 rounded-lg w-48 text-center shadow-sm flow-node">
+                            <h4 class="font-bold text-[#4361ee] text-sm mb-1">Alternative Data</h4>
+                            <p class="text-xs text-slate-500">Cashflow & Utility API</p>
+                        </div>
+                        <div class="bg-white border-2 border-[#4361ee] p-4 rounded-lg w-48 text-center shadow-sm flow-node">
+                            <h4 class="font-bold text-[#4361ee] text-sm mb-1">ML Model</h4>
+                            <p class="text-xs text-slate-500">Proprietary Risk Scoring</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow-down h-8"></div>
+
+                    <!-- Row 4: Final Decision -->
+                    <div class="flex justify-center gap-6">
+                        <div class="bg-[#4cc9f0] text-white px-6 py-3 rounded-lg font-bold shadow-md w-32 text-center">
+                            Approve
+                        </div>
+                        <div class="bg-slate-400 text-white px-6 py-3 rounded-lg font-bold shadow-md w-32 text-center">
+                            Manual Review
+                        </div>
+                        <div class="bg-[#f72585] text-white px-6 py-3 rounded-lg font-bold shadow-md w-32 text-center">
+                            Decline
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: The Friction Trade-off (Scatter Plot) -->
+        <section class="mb-12">
+            <div class="bg-[#0f172a] rounded-2xl p-8 md:p-12 text-white">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">The "Friction vs. Risk" Paradox</h3>
+                        <p class="text-slate-300 mb-6 leading-relaxed">
+                            Every additional security check adds friction, potentially causing customer drop-off. The holy grail of risk management is <strong>Dynamic Friction</strong>: applying rigorous checks only to high-risk signals while fast-tracking low-risk users.
+                        </p>
+                        <div class="p-4 bg-white/10 rounded-lg backdrop-blur-sm border border-white/20">
+                            <h4 class="font-bold text-[#4cc9f0] mb-2">Chart Analysis</h4>
+                            <p class="text-sm text-slate-300">
+                                The scatter plot shows various verification methods. The ideal zone is the <strong>bottom-right quadrant</strong>: High Risk Detection capabilities with Low User Friction (e.g., Passive Biometrics).
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-2xl">
+                        <div class="chart-container">
+                            <canvas id="scatterChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-200 pt-8 pb-12 text-center text-slate-500 text-sm">
+            <p>&copy; 2025 Financial Risk Insights. Data simulated for educational visualization.</p>
+            <p class="mt-2">Generated by Canvas Infographics AI.</p>
+        </footer>
+
+    </main>
+
+    <!-- JavaScript Implementation -->
+    <script>
+        // --- 1. Label Wrapping Utility (Mandatory Constraint) ---
+        function splitLabel(str) {
+            const limit = 16;
+            if (str.length <= limit) return str;
+            
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length < limit) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- 2. Shared Tooltip Configuration (Mandatory Constraint) ---
+        const sharedTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- 3. Chart Implementations ---
+
+        // Chart 1: Fraud Types (Bar Chart)
+        const ctxFraud = document.getElementById('fraudTypeChart').getContext('2d');
+        const rawFraudLabels = ["Credit Card Theft", "Account Takeover", "Synthetic Identity", "Friendly Fraud", "New Account Fraud"];
+        const processedFraudLabels = rawFraudLabels.map(splitLabel);
+
+        new Chart(ctxFraud, {
+            type: 'bar',
+            data: {
+                labels: processedFraudLabels,
+                datasets: [{
+                    label: 'Increase in Attack Volume (YoY %)',
+                    data: [12, 150, 95, 45, 80],
+                    backgroundColor: [
+                        '#4cc9f0', // Sky
+                        '#f72585', // Pink (High alert)
+                        '#3a0ca3', // Purple (Hidden/Synthetic)
+                        '#4361ee', // Blue
+                        '#4cc9f0'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: sharedTooltipOptions,
+                    title: {
+                        display: true,
+                        text: 'YoY Growth of Fraud Attack Vectors',
+                        font: { size: 16, family: 'Inter' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: '% Growth' }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Synthetic Identity (Line Chart)
+        const ctxSynthetic = document.getElementById('syntheticChart').getContext('2d');
+        new Chart(ctxSynthetic, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024', '2025 (Proj)'],
+                datasets: [{
+                    label: 'Synthetic Identity Losses ($ Billions)',
+                    data: [1.2, 1.8, 2.5, 3.8, 4.9, 6.0],
+                    borderColor: '#f72585',
+                    backgroundColor: 'rgba(247, 37, 133, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: '#f72585',
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: true, position: 'bottom' },
+                    tooltip: sharedTooltipOptions
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Losses ($ Billions)' }
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Data Power (Radar Chart)
+        const ctxRadar = document.getElementById('dataRadarChart').getContext('2d');
+        // Labels for Radar might be long
+        const rawRadarLabels = ["Credit History Length", "Payment Regularity", "Device Behavioral Data", "Social Connection Graph", "Utility & Rent Data"];
+        const processedRadarLabels = rawRadarLabels.map(splitLabel);
+
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: processedRadarLabels,
+                datasets: [{
+                    label: 'Traditional Data',
+                    data: [90, 95, 10, 5, 20],
+                    fill: true,
+                    backgroundColor: 'rgba(67, 97, 238, 0.2)', // Blue transparent
+                    borderColor: '#4361ee',
+                    pointBackgroundColor: '#4361ee'
+                }, {
+                    label: 'Modern/Alt Data',
+                    data: [40, 85, 90, 75, 88],
+                    fill: true,
+                    backgroundColor: 'rgba(58, 12, 163, 0.2)', // Purple transparent
+                    borderColor: '#3a0ca3',
+                    pointBackgroundColor: '#3a0ca3'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: sharedTooltipOptions,
+                    title: {
+                        display: true,
+                        text: 'Predictive Power Comparison',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    r: {
+                        angleLines: { color: '#e2e8f0' },
+                        grid: { color: '#e2e8f0' },
+                        pointLabels: {
+                            font: { size: 11 }
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Friction vs Risk (Scatter Plot)
+        const ctxScatter = document.getElementById('scatterChart').getContext('2d');
+        // Manually handling labels inside data objects for scatter
+        
+        new Chart(ctxScatter, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Verification Methods',
+                    data: [
+                        { x: 90, y: 90, label: 'KBV (Security Qs)' }, // High Friction, High Risk Cover
+                        { x: 10, y: 20, label: 'Email Format Check' }, // Low Friction, Low Risk Cover
+                        { x: 20, y: 85, label: 'Passive Biometrics' }, // Low Friction, High Risk Cover (Ideal)
+                        { x: 80, y: 95, label: 'Video Interview' }, // Very High Friction, Max Risk Cover
+                        { x: 50, y: 60, label: 'SMS 2FA' }, // Med Friction, Med Risk Cover
+                        { x: 30, y: 75, label: 'Device Fingerprint' } // Low-Med Friction, Good Risk Cover
+                    ],
+                    backgroundColor: function(context) {
+                        // Color points based on "Ideal" zone (Low X, High Y)
+                        const val = context.raw;
+                        if(val && val.x < 40 && val.y > 70) return '#4cc9f0'; // Ideal (Cyan)
+                        if(val && val.x > 70) return '#f72585'; // High Friction (Pink)
+                        return '#4361ee'; // Standard (Blue)
+                    },
+                    pointRadius: 8,
+                    pointHoverRadius: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw.label + ': Friction ' + context.raw.x + ', Safety ' + context.raw.y;
+                            }
+                        }
+                    },
+                    annotation: {
+                        // Note: Chart.js annotation plugin not loaded, using title context instead
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'User Friction (Time/Effort)', color: '#64748b' },
+                        min: 0, max: 100
+                    },
+                    y: {
+                        title: { display: true, text: 'Risk Detection Capability', color: '#64748b' },
+                        min: 0, max: 100
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
